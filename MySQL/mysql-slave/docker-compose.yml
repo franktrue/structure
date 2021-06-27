@@ -1,0 +1,44 @@
+# 主从数据库
+version: '3'
+
+services:
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    links:
+      - master:db
+
+  master:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - ./config/master/conf:/etc/mysql/conf.d
+      - ./config/master/logs:/var/log/mysql
+      - ./config/master/data:/var/lib/mysql
+
+  slave1:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - ./config/slave1/conf:/etc/mysql/conf.d
+      - ./config/slave1/logs:/var/log/mysql
+      - ./config/slave1/data:/var/lib/mysql
+
+  slave2:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - ./config/slave2/conf:/etc/mysql/conf.d
+      - ./config/slave2/logs:/var/log/mysql
+      - ./config/slave2/data:/var/lib/mysql

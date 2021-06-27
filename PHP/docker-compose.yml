@@ -1,0 +1,35 @@
+# PHP+Nginx
+version: 3
+services:
+  nginx:
+    image: nginx:latest
+    container_name: compose-nginx
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - TZ=Asia/Shanghai
+    depends_on:
+      - php
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - ./www:/usr/share/nginx/html
+      - ./config/nginx/log:/var/log/nginx
+    networks:
+      - app
+  php:
+    image: php:7.4-fpm
+    container_name: compose-php
+    restart: always
+    ports:
+      - 9000:9000
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./www:/usr/share/nginx/html
+    networks:
+      - app
+
+networks:
+  app:  
