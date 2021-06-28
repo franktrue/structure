@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE mycat:schema SYSTEM "schema.dtd">
+<mycat:schema xmlns:mycat="http://io.mycat/">
+    <!-- 配置3个逻辑库-->
+	<schema name="adnc_usr" checkSQLschema="true" sqlMaxLimit="100" dataNode="dn_usr"></schema>
+	<schema name="adnc_maint" checkSQLschema="true" sqlMaxLimit="100" dataNode="dn_maint"></schema>
+	<schema name="adnc_cus" checkSQLschema="true" sqlMaxLimit="100" dataNode="dn_cus"></schema>
+
+    <!-- 逻辑库对应的真实数据库-->
+	<dataNode name="dn_usr" dataHost="dh_adnc" database="adnc_usr" />
+	<dataNode name="dn_maint" dataHost="dh_adnc" database="adnc_maint" />
+	<dataNode name="dn_cus" dataHost="dh_adnc" database="adnc_cus" />
+
+    <!--真实数据库所在的服务器地址，这里配置了1主2从。主服务器(hostM1)宕机会自动切换到(hostS1) -->
+	<dataHost name="dh_adnc" maxCon="1000" minCon="10" balance="1" writeType="0" dbType="mysql" dbDriver="native">
+		<heartbeat>select user()</heartbeat>
+		<writeHost host="hostM1" url="mysql-master:3306" user="root" password="123456" >
+			<readHost host="hostS2" url="mysql-slave2:3306" user="root" password="123456" />
+		</writeHost>
+		<writeHost host="hostS1" url="mysql-slave1:3306" user="root" password="123456" />
+	</dataHost>
+
+</mycat:schema>

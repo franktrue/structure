@@ -1,6 +1,22 @@
 # 架构学习
 | 总结架构学习中的点滴
 
+## 前期准备
+### Docker环境
+#### 为什么基于Docker搭建？
+
+* 资源有限
+* 虚拟机搭建对机器配置有要求，并且安装mysql步骤繁琐
+* 一台机器上可以运行多个Docker容器
+* Docker容器之间相互独立，有独立ip，互不冲突
+* Docker使用步骤简便，启动容器在秒级别
+
+#### 创建公有网络app
+方便各个Docker compose集群之间网络共享
+```
+docker network create -d bridge app
+```
+
 ## 一. 常用的设计模式以及使用场景
 工厂，单例，策略，注册，适配，观察者，原型，装饰器，facade，loc，pipeline
 

@@ -32,4 +32,5 @@ services:
       - app
 
 networks:
-  app:  
+  app:
+    external: true

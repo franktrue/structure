@@ -1,0 +1,21 @@
+# Mycat 环境
+version: '3'
+services:
+  mycat:
+    build: ./docker
+    restart: always
+    ports:
+      - 8066:8066
+      - 9066:9066
+    volumes:
+      # 如果是文件挂载需要提前在主机创建文件
+      - ./config/conf/schema.xml:/usr/local/mycat/conf/schema.xml:ro
+      - ./config/conf/server.xml:/usr/local/mycat/conf/server.xml:ro
+      - ./config/logs/:/usr/local/mycat/logs/:rw
+    networks:
+      - app
+
+# 公用网络
+networks:
+  app:
+    external: true
