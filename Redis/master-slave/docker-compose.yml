@@ -1,0 +1,45 @@
+version: '3'
+services: 
+  master:
+    image: redis
+    container_name: redis-master
+    restart: always
+    ports: 
+      - 6379:6379
+    networks: 
+      - app
+    # volumes: 
+    #   - ./master/:/etc/redis/
+    # command: redis-server /etc/redis/conf/redis.
+    command: redis-server --requirepass 123456
+
+  slave1:
+    image: redis
+    container_name: redis-slave1
+    restart: always
+    ports: 
+      - 6380:6379
+    networks: 
+      - app
+    # volumes: 
+    #   - ./slave1/:/etc/redis/
+    # command: redis-server /etc/redis/conf/redis.conf
+    command: redis-server --slaveof redis-master 6379  --requirepass 123456 --masterauth 123456
+    
+  slave2:
+    image: redis
+    container_name: redis-slave2
+    restart: always
+    ports: 
+      - 6381:6379
+    networks: 
+      - app
+    # volumes: 
+    #   - ./slave1/:/etc/redis/
+    # command: redis-server /etc/redis/conf/redis.conf
+    command: redis-server --slaveof redis-master 6379  --requirepass 123456 --masterauth 123456
+
+networks: 
+  app:
+    external: true
+    
