@@ -1,12 +1,19 @@
-# keepalived+nginx
 FROM nginx
 
-RUN apt-get update && apt-get upgrade
+ARG TZ="Asia/Shanghai"
 
-RUN apt-get install -y bash curl ipvsadm iproute2 openrc keepalived
+ENV TZ ${TZ}
 
-COPY ["./entrypoint.sh", "/opt/entrypoint.sh"]
+COPY keepalived/  /etc/keepalived
+COPY docker-entrypoint-n.sh /
 
-RUN chmod +x /opt/entrypoint.sh
+RUN apt-get update  \
+    && apt-get install -y keepalived \
+    && apt install -y procps \
+    && apt install -y vim \
+    && chmod +x /etc/keepalived/chk_nginx.sh \
+    && chmod +x /docker-entrypoint-n.sh
 
-CMD ["/opt/entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint-n.sh"]
+
+CMD ["nginx", "-g",  "daemon off;" ]

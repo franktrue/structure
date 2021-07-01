@@ -22,13 +22,14 @@ services:
       - 8081:80
     environment:
       - TZ=Asia/Shanghai
+    privileged: true
     volumes:
       - ./www/index-master.html:/usr/share/nginx/html/index.html
       - ./www/favicon.ico:/usr/share/nginx/html/favicon.ico
-      - ./keepalived/master.conf:/etc/keepalived/keepalived.conf
+      - ./keepalived/master.conf:/etc/keepalived/keepalived.conf:rw
     networks:
       static-network:
-        ipv4_address: 172.200.128.2
+        ipv4_address: 172.100.0.2
     cap_add:
       - NET_ADMIN
   
@@ -41,19 +42,21 @@ services:
       - 8082:80
     environment:
       - TZ=Asia/Shanghai
+    privileged: true
     volumes:
       - ./www/index-slave.html:/usr/share/nginx/html/index.html
       - ./www/favicon.ico:/usr/share/nginx/html/favicon.ico
-      - ./keepalived/slave.conf:/etc/keepalived/keepalived.conf
+      - ./keepalived/slave.conf:/etc/keepalived/keepalived.conf:rw
     networks:
       static-network:
-        ipv4_address: 172.200.128.3
+        ipv4_address: 172.100.0.3
     cap_add:
       - NET_ADMIN
   proxy:
-    image:  haproxy
+    image: haproxy
     ports:
       - 8099:6301
+    privileged: true
     volumes:
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
     networks:
@@ -63,4 +66,4 @@ networks:
   static-network:
     ipam:
       config:
-        - subnet: 172.200.0.0/16
+        - subnet: 172.100.0.0/16

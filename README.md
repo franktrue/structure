@@ -17,6 +17,12 @@
 docker network create -d bridge app
 ```
 
+#### 特别提示（很重要），强烈建议使用MAC或虚拟机linux
+* Windows环境下当COPY `xxx.sh`脚本文件到镜像时，默认的换行符是\n，故而复制过去无法被执行。
+解决办法很简单，切换文件格式为LF即可。
+
+* Windows下docker-compose volumes的文件（夹）无法修改权限，会造成各种奇怪问题
+
 ## 一. 常用的设计模式以及使用场景
 工厂，单例，策略，注册，适配，观察者，原型，装饰器，facade，loc，pipeline
 

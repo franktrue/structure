@@ -14,9 +14,18 @@ docker-compose up -d
 docker stop 8081端口nginx容器的ID
 这时我们再去访问80端口看到的就是slave了
 
+## keepalived
+* 主备模式：可能存在备用机一直处于闲置状态的资源浪费
+* 双主模式：相互主备
+
+## 注意事项
+keepalived配置文件权限需644
+
 
 参考文档：
 * <https://blog.csdn.net/m0_49558851/article/details/107786372>
 * <https://www.cnblogs.com/cheyunhua/p/10670070.html>
 * <https://blog.csdn.net/Dream_Weave/article/details/85166907>
 * <https://www.cnblogs.com/zhhtao/p/4530592.html>
+* <https://blog.csdn.net/zcxey2911/article/details/105593005>
+* <https://www.cnblogs.com/whroid/p/13636667.html>
