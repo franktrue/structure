@@ -36,5 +36,7 @@ if [ "$1" = "nginx" -o "$1" = "nginx-debug" ]; then
 fi
 
 exec "$@"
+exec "chmod -R 644 /etc/keepalived/keepalived.conf"
 
+# 该命令在windows下失效
 exec "service keepalived start"

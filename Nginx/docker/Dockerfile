@@ -10,7 +10,6 @@ COPY docker-entrypoint-n.sh /
 RUN apt-get update  \
     && apt-get install -y keepalived \
     && apt install -y procps \
-    && apt install -y vim \
     && chmod +x /etc/keepalived/chk_nginx.sh \
     && chmod +x /docker-entrypoint-n.sh
 

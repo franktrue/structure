@@ -29,7 +29,7 @@ services:
       - ./keepalived/master.conf:/etc/keepalived/keepalived.conf:rw
     networks:
       static-network:
-        ipv4_address: 172.100.0.2
+        ipv4_address: 172.100.0.10
     cap_add:
       - NET_ADMIN
   
@@ -49,7 +49,7 @@ services:
       - ./keepalived/slave.conf:/etc/keepalived/keepalived.conf:rw
     networks:
       static-network:
-        ipv4_address: 172.100.0.3
+        ipv4_address: 172.100.0.20
     cap_add:
       - NET_ADMIN
   proxy:
@@ -66,4 +66,4 @@ networks:
   static-network:
     ipam:
       config:
-        - subnet: 172.100.0.0/16
+        - subnet: 172.100.0.0/24
