@@ -26,7 +26,7 @@ services:
     volumes:
       - ./www/index-master.html:/usr/share/nginx/html/index.html
       - ./www/favicon.ico:/usr/share/nginx/html/favicon.ico
-      - ./keepalived/master.conf:/etc/keepalived/keepalived.conf:rw
+      - ./keepalived/master.conf:/etc/keepalived/keepalived.conf
     networks:
       static-network:
         ipv4_address: 172.100.0.10
@@ -46,7 +46,7 @@ services:
     volumes:
       - ./www/index-slave.html:/usr/share/nginx/html/index.html
       - ./www/favicon.ico:/usr/share/nginx/html/favicon.ico
-      - ./keepalived/slave.conf:/etc/keepalived/keepalived.conf:rw
+      - ./keepalived/slave.conf:/etc/keepalived/keepalived.conf
     networks:
       static-network:
         ipv4_address: 172.100.0.20
