@@ -1,0 +1,20 @@
+{
+    "name": "franktrue/chat",
+    "description": "A simple chat room.",
+    "type": "project",
+    "require": {},
+    "require-dev": {},
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Franktrue",
+            "email": "807615827@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+          "Chat\\": "src/"
+        }
+    }
+}

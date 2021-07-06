@@ -1,0 +1,17 @@
+version: '3'
+services:
+  swoole:
+    image: phpswoole/swoole
+    restart: always
+    environment:
+      DISABLE_DEFAULT_SERVER: 1
+    ports:
+      - "9501:9501"
+    command: php src/run.php
+    volumes:
+      - .:/var/www
+    depends_on:
+      - redis
+  redis:
+    image: redis
+    restart: always
