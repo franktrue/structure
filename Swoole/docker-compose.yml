@@ -1,10 +1,22 @@
 version: '3'
 services:
   swoole:
-    image: phpswoole/swoole
+    build: .
     environment:
       DISABLE_DEFAULT_SERVER: 1
     ports:
-      - "9000:9501"
+      - "9501:9501"
+      - "9502:9502"
     volumes:
       - ./src:/var/www
+    depends_on:
+      - redis
+      - mysql
+  redis:
+    image: redis
+    restart: always
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456

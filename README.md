@@ -23,6 +23,11 @@ docker network create -d bridge app
 
 * Windows下docker-compose volumes的文件（夹）无法修改权限，会造成各种奇怪问题
 
+## 一些准备知识
+* [Linux的进程线程及调度](https://www.cnblogs.com/leisure_chn/p/10393707.html)
+* [阻塞\非阻塞与同步\异步](https://zhuanlan.zhihu.com/p/88728018)
+* [C++ 协程与网络编程](https://blog.csdn.net/shixin_0125/article/details/78848388)
+
 ## 一. 常用的设计模式以及使用场景
 工厂，单例，策略，注册，适配，观察者，原型，装饰器，facade，loc，pipeline
 
